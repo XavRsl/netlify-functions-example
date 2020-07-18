@@ -6,7 +6,7 @@ exports.handler = async (event, context) => {
 //  const doi = event.queryStringParameters.doi;
   
   return fetch(API_ENDPOINT, { headers: { "Accept": "application/vnd.citationstyles.csl+json;q=1.0" } })
-    .then(response => response)
+    .then(response => response.json())
     .then(data => ({
       statusCode: 200,
       body: data
