@@ -1,13 +1,15 @@
 import fetch from "node-fetch";
 
-const API_ENDPOINT = "https://icanhazdadjoke.com/";
+const API_ENDPOINT = "https://doi.org/";
 
 exports.handler = async (event, context) => {
-  return fetch(API_ENDPOINT, { headers: { "Accept": "application/json" } })
+  const doi = event.queryStringParameters.doi;
+  
+  return fetch(API_ENDPOINT, { headers: { "Accept": "application/vnd.citationstyles.csl+json;q=1.0" } })
     .then(response => response.json())
     .then(data => ({
       statusCode: 200,
-      body: data.joke
+      body: data
     }))
     .catch(error => ({ statusCode: 422, body: String(error) }));
 };
